@@ -11,11 +11,17 @@ export function getSupabaseClient(): SupabaseClient {
     return supabaseClient
   }
 
-  // Só inicializa no cliente (browser)
+  // Durante o build (SSR), retorna um cliente mock que não vai ser usado
+  // Isso evita erros durante o prerender
   if (typeof window === 'undefined') {
-    throw new Error('Supabase client can only be initialized on the client side')
+    // Retorna um cliente mock apenas para evitar erro durante build
+    // Este cliente nunca será usado, pois só é chamado no cliente
+    const mockUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co'
+    const mockKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-key'
+    return createClient(mockUrl, mockKey)
   }
 
+  // Só inicializa no cliente (browser)
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 

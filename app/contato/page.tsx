@@ -1,5 +1,8 @@
 'use client'
 
+// Força renderização dinâmica (não faz prerender estático)
+export const dynamic = 'force-dynamic'
+
 import { useState } from 'react'
 import { Mail, Phone, MapPin, Send } from 'lucide-react'
 import { getSupabaseClient } from '@/lib/supabase'
