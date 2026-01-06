@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Zap, Home, Building, Factory, Wrench, Lightbulb, Shield } from 'lucide-react'
 
 export default function Servicos() {
@@ -115,12 +116,12 @@ export default function Servicos() {
           <p className="text-xl mb-6 text-gray-100">
             Entre em contato conosco e solicite um orçamento gratuito para seu projeto
           </p>
-          <a
+          <Link
             href="/contato"
             className="bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition inline-block"
           >
             Solicitar Orçamento
-          </a>
+          </Link>
         </div>
       </div>
     </div>
