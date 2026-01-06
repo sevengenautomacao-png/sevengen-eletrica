@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { supabase } from '@/lib/supabase'
+import { getSupabaseClient } from '@/lib/supabase'
 import { Mail, Phone, Calendar, MessageSquare, Trash2, RefreshCw } from 'lucide-react'
 
 interface Contato {
@@ -22,6 +22,7 @@ export default function Admin() {
   const fetchContatos = async () => {
     try {
       setLoading(true)
+      const supabase = getSupabaseClient()
       const { data, error } = await supabase
         .from('contatos')
         .select('*')
@@ -43,6 +44,7 @@ export default function Admin() {
     if (!confirm('Tem certeza que deseja excluir este contato?')) return
 
     try {
+      const supabase = getSupabaseClient()
       const { error } = await supabase
         .from('contatos')
         .delete()

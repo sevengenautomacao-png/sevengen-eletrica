@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Mail, Phone, MapPin, Send } from 'lucide-react'
-import { supabase } from '@/lib/supabase'
+import { getSupabaseClient } from '@/lib/supabase'
 
 export default function Contato() {
   const [formData, setFormData] = useState({
@@ -22,6 +22,7 @@ export default function Contato() {
 
     try {
       // Inserir no Supabase
+      const supabase = getSupabaseClient()
       const { error } = await supabase
         .from('contatos')
         .insert([
